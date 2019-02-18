@@ -428,6 +428,11 @@ alfa-network_tube2h: ar933x_common
 	@$(call define_add,CONFIG_FOR_ALFA_NETWORK_TUBE2H,1)
 	@$(MKCONFIG) -a ap121 mips mips ap121 ar7240 ar7240
 
+arduino_yun: ar933x_common
+	@$(call config_init,Arduion yun,arduino yun,16,20,1,QCA_AR9331_SOC)
+	@$(call define_add,CONFIG_FOR_ARDUINO_YUN,1)
+	@$(MKCONFIG) -a ap121 mips mips ap121 ar7240 ar7240
+
 comfast_cf-e314n: qca953x_common
 	@$(call config_init,Comfast CF-E314N,cf-e314n,16,17,1,QCA_QCA9531_SOC)
 	@$(call define_add,CONFIG_FOR_COMFAST_CF_E314N,1)

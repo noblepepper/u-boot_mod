@@ -48,6 +48,12 @@
 	#define CONFIG_QCA_GPIO_MASK_OUT_INIT_H	GPIO28
 	#define CONFIG_QCA_GPIO_MASK_OUT_INIT_L	GPIO18 | GPIO22
 
+#elif defined(CONFIG_FOR_ARDUINO_YUN)
+
+	#define CONFIG_QCA_GPIO_MASK_LED_ACT_H	GPIO1 | GPIO17
+	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO0
+	#define CONFIG_QCA_GPIO_MASK_IN		GPIO20
+
 #elif defined(CONFIG_FOR_CREATCOMM_D3321)
 
 	#define CONFIG_QCA_GPIO_MASK_LED_ACT_H	GPIO0  | GPIO13 | GPIO14 |\
@@ -182,6 +188,12 @@
 				"rootfstype=squashfs init=/sbin/init "\
 				"mtdparts=ar7240-nor0:256k(u-boot),64k(u-boot-env),6144k(rootfs),1600k(uImage),64k(NVRAM),64k(ART)"
 
+#elif defined(CONFIG_FOR_ARDUINO_YUN)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,250000 root=31:02 "\
+				"rootfstype=squashfs init=/sbin/init "\
+				"mtdparts=ar7240-nor0:256k(u-boot),64k(u-boot-env),16000k(firmware),64k(art)"
+
 #elif defined(CONFIG_FOR_CREATCOMM_D3321)
 
 	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:03 "\
@@ -254,6 +266,7 @@
     defined(CONFIG_FOR_ALFA_NETWORK_AP121F)    ||\
     defined(CONFIG_FOR_ALFA_NETWORK_HORNET_UB) ||\
     defined(CONFIG_FOR_ALFA_NETWORK_TUBE2H)    ||\
+    defined(CONFIG_FOR_ARDUINO_YUN)            ||\
     defined(CONFIG_FOR_CREATCOMM_D3321)        ||\
     defined(CONFIG_FOR_GLINET_GL_AR150)        ||\
     defined(CONFIG_FOR_GLINET_GL_USB150)
@@ -298,6 +311,7 @@
 #if defined(CONFIG_FOR_8DEVICES_CARAMBOLA2)    ||\
     defined(CONFIG_FOR_ALFA_NETWORK_HORNET_UB) ||\
     defined(CONFIG_FOR_ALFA_NETWORK_TUBE2H)    ||\
+    defined(CONFIG_FOR_ARDUINO_YUN)            ||\
     defined(CONFIG_FOR_CREATCOMM_D3321)        ||\
     defined(CONFIG_FOR_GLINET_GL_AR150)        ||\
     defined(CONFIG_FOR_GLINET_GL_USB150)
@@ -357,6 +371,7 @@
 #if defined(CONFIG_FOR_8DEVICES_CARAMBOLA2)    ||\
     defined(CONFIG_FOR_ALFA_NETWORK_HORNET_UB) ||\
     defined(CONFIG_FOR_ALFA_NETWORK_TUBE2H)    ||\
+    defined(CONFIG_FOR_ARDUINO_YUN)            ||\
     defined(CONFIG_FOR_CREATCOMM_D3321)        ||\
     defined(CONFIG_FOR_DRAGINO_MS14)           ||\
     defined(CONFIG_FOR_VILLAGE_TELCO_MP2)
@@ -416,6 +431,7 @@
     !defined(CONFIG_FOR_ALFA_NETWORK_AP121F)         &&\
     !defined(CONFIG_FOR_ALFA_NETWORK_HORNET_UB)      &&\
     !defined(CONFIG_FOR_ALFA_NETWORK_TUBE2H)         &&\
+    !defined(CONFIG_FOR_ARDUINO_YUN)                 &&\
     !defined(CONFIG_FOR_CREATCOMM_D3321)             &&\
     !defined(CONFIG_FOR_DLINK_DIR505_A1)             &&\
     !defined(CONFIG_FOR_DRAGINO_MS14)                &&\
@@ -481,6 +497,13 @@
 
 #endif
 
+/* Arduino Yun uses 250 000 baud serial */
+#if defined(CONFIG_FOR_ARDUINO_YUN)
+	#undef CONFIG_BAUDRATE
+	#define CONFIG_BAUDRATE 250000
+#endif
+
+
 /*
  * ===========================
  * HTTP recovery configuration
@@ -500,6 +523,7 @@
 
 /* Firmware size limit */
 #if defined(CONFIG_FOR_8DEVICES_CARAMBOLA2) ||\
+    defined(CONFIG_FOR_ARDUINO_YUN)         ||\
     defined(CONFIG_FOR_GLINET_GL_AR150)     ||\
     defined(CONFIG_FOR_GLINET_GL_USB150)
 
@@ -545,6 +569,7 @@
     defined(CONFIG_FOR_ALFA_NETWORK_AP121F)    ||\
     defined(CONFIG_FOR_ALFA_NETWORK_HORNET_UB) ||\
     defined(CONFIG_FOR_ALFA_NETWORK_TUBE2H)    ||\
+    defined(CONFIG_FOR_ARDUINO_YUN)            ||\
     defined(CONFIG_FOR_CREATCOMM_D3321)        ||\
     defined(CONFIG_FOR_GLINET_GL_AR150)        ||\
     defined(CONFIG_FOR_GLINET_GL_USB150)
@@ -580,6 +605,7 @@
     !defined(CONFIG_FOR_ALFA_NETWORK_AP121F)         &&\
     !defined(CONFIG_FOR_ALFA_NETWORK_HORNET_UB)      &&\
     !defined(CONFIG_FOR_ALFA_NETWORK_TUBE2H)         &&\
+    !defined(CONFIG_FOR_ARDUINO_YUN)                 &&\
     !defined(CONFIG_FOR_CREATCOMM_D3321)             &&\
     !defined(CONFIG_FOR_DLINK_DIR505_A1)             &&\
     !defined(CONFIG_FOR_DRAGINO_MS14)                &&\
